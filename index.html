@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaxPak — FBR Tax Filer &amp; Return Helper (UX Concept)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">T</span> TaxPak</div>
+  <p class="tagline">File in 30 minutes. Save all year. — FBR tax filer &amp; return helper for Pakistan</p>
+  <p class="sample-note">SAMPLE DATA — every figure, person, CNIC and rate shown here is invented for this UX concept demo, built around public FBR facts. These are NOT real taxpayer records. Tax slabs are from the Finance Act 2026 for Tax Year 2027 (salaried); withholding rates are sample rates from the FBR rate card — always verify current rates on fbr.gov.pk before you act on them.</p>
+</header>
+
+<nav class="tabs" aria-label="TaxPak sections">
+  <button id="tab-calculator" class="tab-btn active" data-tab="calculator">Tax Calculator</button>
+  <button id="tab-atl" class="tab-btn" data-tab="atl">ATL Check</button>
+  <button id="tab-checklist" class="tab-btn" data-tab="checklist">Return Checklist</button>
+  <button id="tab-withholding" class="tab-btn" data-tab="withholding">Withholding Tracker</button>
+  <button id="tab-spotter" class="tab-btn" data-tab="spotter">Agent Spotter</button>
+  <button id="tab-deadline" class="tab-btn" data-tab="deadline">Deadline</button>
+</nav>
+
+<main>
+  <!-- Tax calculator -->
+  <section class="card" id="section-calculator">
+    <p class="eyebrow">TAX CALCULATOR — TAX YEAR 2027</p>
+    <h2>File in 30 minutes. Save all year.</h2>
+    <p class="hint">Millions of Pakistanis pay tax through salary deduction but never file a return. Ahmed Raza, 38, Lahore, an accounts officer on Rs 150,000 a month, has his employer deduct Rs 6,000 a month in tax — but he has never filed a return, paid Rs 600 on a Rs 100,000 cash withdrawal as a non-filer, and an agent quoted him Rs 12,000 to file it. TaxPak works out his real tax in seconds, using the Finance Act 2026 salaried slabs for Tax Year 2027.</p>
+    <div class="verify-row">
+      <label>Your monthly salary (Rs)
+        <input id="salary-input" type="number" value="150000" min="0" step="1000">
+      </label>
+      <button id="calc-btn">Calculate my tax</button>
+    </div>
+    <div id="calc-result"></div>
+    <h3>Worked examples — check the maths</h3>
+    <div id="examples-list"></div>
+    <h3>Slab breakdown — where your tax comes from</h3>
+    <div id="slab-list"></div>
+    <p id="calc-summary"></p>
+  </section>
+
+  <!-- ATL checker -->
+  <section class="card" id="section-atl" style="display:none">
+    <p class="eyebrow">FILER-STATUS CHECKER</p>
+    <h2>Are you on the Active Taxpayers List?</h2>
+    <p class="hint">Non-filers pay double withholding everywhere — on bank withdrawals, on mobile bills, on property. Check a sample CNIC to see what the checker returns. Try Ahmed Raza's sample CNIC 35202-1234567-1 (not on ATL) or Sara Malik's 61101-7654321-2 (on ATL).</p>
+    <div class="verify-row">
+      <label>CNIC number
+        <input id="cnic-input" type="text" placeholder="Try 35202-1234567-1 or 61101-7654321-2">
+      </label>
+      <button id="atl-btn">Check ATL status</button>
+    </div>
+    <div id="atl-result"></div>
+    <h3>Refund check — did your employer deduct too much?</h3>
+    <p class="hint">Enter what your employer deducts each month and TaxPak compares it with the tax you actually owe. Ahmed Raza's employer deducts Rs 6,000 a month — Rs 72,000 a year — and his tax is exactly Rs 72,000, so his refund is Rs 0: nothing to claim, nothing extra due.</p>
+    <div class="verify-row">
+      <label>Monthly tax deducted by employer (Rs)
+        <input id="deduct-input" type="number" value="6000" min="0" step="100">
+      </label>
+      <button id="refund-btn">Check my refund</button>
+    </div>
+    <div id="refund-result"></div>
+  </section>
+
+  <!-- Return checklist -->
+  <section class="card" id="section-checklist" style="display:none">
+    <p class="eyebrow">RETURN CHECKLIST — 7 STEPS</p>
+    <h2>Your return, one tick at a time.</h2>
+    <p class="hint">Filing on IRIS takes about 30 minutes and costs nothing — the checklist breaks it into 7 steps. Tick each one off as you finish it; your progress is saved on this device.</p>
+    <p id="checklist-progress"></p>
+    <div id="checklist-list"></div>
+  </section>
+
+  <!-- Withholding tracker -->
+  <section class="card" id="section-withholding" style="display:none">
+    <p class="eyebrow">WITHHOLDING TRACKER</p>
+    <h2>What being a non-filer costs you.</h2>
+    <p class="hint">On a bank cash withdrawal over Rs 50,000 a day, a filer pays 0% and a non-filer pays 0.6% (sample rates from the FBR rate card — verify current rates on fbr.gov.pk). Ahmed Raza made 4 withdrawals of Rs 100,000 in November: as a non-filer he paid Rs 2,400; a filer would have paid Rs 0. His year-to-date sample loss is Rs 18,600.</p>
+    <div class="verify-row">
+      <label>One cash withdrawal (Rs)
+        <input id="withdraw-input" type="number" value="100000" min="0" step="5000">
+      </label>
+      <button id="withdraw-btn">Compare filer vs non-filer</button>
+    </div>
+    <div id="withdraw-result"></div>
+    <h3>Monthly ledger — July to November 2026 (sample)</h3>
+    <div id="withdrawal-list"></div>
+    <p id="withdrawal-summary"></p>
+  </section>
+
+  <!-- Agent spotter quiz -->
+  <section class="card" id="section-spotter" style="display:none">
+    <p class="eyebrow">AGENT SPOTTER</p>
+    <h2>Spot the agent traps.</h2>
+    <p class="hint">Four things an agent does that should stop you paying him — and one safe habit. An agent charging Rs 5,000–15,000 to file a return you can file free on IRIS in about 30 minutes; a "guaranteed ATL in 24 hours" promise when ATL updates weekly; asking for your IRIS password or OTP; and an SMS saying "FBR: your ATL is cancelled, pay here" with a link. Call each one a red flag or safe, then check your score.</p>
+    <div id="spotter-quiz"></div>
+    <button id="spotter-btn">Check my score</button>
+    <div id="spotter-result"></div>
+  </section>
+
+  <!-- Late-filing explainer -->
+  <section class="card" id="section-deadline" style="display:none">
+    <p class="eyebrow">LATE-FILING EXPLAINER</p>
+    <h2>The deadline just passed. Here is what it means.</h2>
+    <p class="hint">The Tax Year 2026 return was due 30 Sep 2026, extended twice to 31 Oct 2026 (Circulars 3 &amp; 4 of 2026-27, Section 214A). There was no third extension. FBR received 7.3 million returns by 29 Oct 2026. Returns filed from 1 Nov 2026 are late — and rejoining the Active Taxpayers List costs an individual Rs 25,000 (Section 182A).</p>
+    <div id="deadline-box"></div>
+    <h3>What to do now</h3>
+    <p class="hint">File the late return on IRIS, pay the Rs 25,000 ATL surcharge, and check the Active Taxpayers List a week later. Then put the next deadline in your calendar: the Tax Year 2027 return is due 30 Sep 2027.</p>
+  </section>
+
+  <button id="reset-demo" class="secondary">Reset demo data</button>
+</main>
+
+<footer>
+  <p>TaxPak is an unofficial UX concept by Muhammad Abbas Khan — not an FBR app. All figures, people and CNICs are sample data. Verify current rates on fbr.gov.pk.</p>
+  <p>Available for new projects: abbasmomand98@gmail.com</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
